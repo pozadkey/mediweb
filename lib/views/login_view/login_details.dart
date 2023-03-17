@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:mediweb/views/patients_records/patients_records.dart';
-
 import '../../../widgets/buttons/primary_button.dart';
+import '../patients_records/patients_records_view.dart';
 
 class LoginDetails extends StatefulWidget {
   const LoginDetails({Key? key}) : super(key: key);
@@ -226,7 +225,7 @@ class _LoginDetailsState extends State<LoginDetails> {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => PatientsRecords()),
+                                pageBuilder: (_, __, ___) => PatientsRecordsView()),
                           );
                         });
                       } else {
