@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 final symptomNameProvider = StateProvider<String>((ref) => 'Select Symptom');
 
 // Initial Selected Value
@@ -35,6 +34,13 @@ const _labelFont = TextStyle(
     letterSpacing: 0.6,
     fontWeight: FontWeight.w500);
 
+const _errorText = TextStyle(
+    fontSize: 12,
+    color: Color.fromARGB(255, 240, 93, 93),
+    height: 1.5,
+    letterSpacing: 0.6,
+    fontWeight: FontWeight.w500);
+
 class SymptomsMenu extends ConsumerWidget {
   const SymptomsMenu({super.key});
 
@@ -43,11 +49,16 @@ class SymptomsMenu extends ConsumerWidget {
     return DropdownButtonFormField(
       decoration: const InputDecoration(
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent, width: 2),
-        ),
+            borderSide: BorderSide(color: Colors.transparent, width: 2),
+            borderRadius: BorderRadius.zero),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.transparent, width: 2),
         ),
+        errorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 240, 93, 93), width: 2),
+        ),
+        errorStyle: _errorText,
         filled: true,
         fillColor: Color.fromARGB(255, 200, 200, 200),
       ),
@@ -71,8 +82,9 @@ class SymptomsMenu extends ConsumerWidget {
           ),
         );
       }).toList(),
-      // After selecting the desired option,it will
-      // change button value to selected value
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+          value == 'Select Symptom' ? 'Please select  a symptom' : null,
       onChanged: (String? newValue) {
         ref
             .watch(symptomNameProvider.notifier)

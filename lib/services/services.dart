@@ -1,25 +1,33 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 
 import '../models/symptoms_model.dart';
 
 class ApiServices {
+  freshData() async {
+    return await FirebaseFirestore.instance
+        .collection('admin')
+        .doc('my-admin')
+        .get()
+        .then((value) {
+      return value.data()!['token'].toString();
+    });
+  }
+
   Future<List<SymptomsModel>> getDiagnosis(
     String gender,
     String dob,
     String symptoms,
   ) async {
-    String baseURL = 'https://sandbox-healthservice.priaid.ch';
+    String baseURL = 'https://healthservice.priaid.ch';
     String route = '/diagnosis?';
     symptoms;
-
-    // = symptomsList.join(',');
     gender;
     dob;
-    String token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InBvemFydG5nQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc2lkIjoiMTE3NDIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiIyMDAiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL2xpbWl0IjoiOTk5OTk5OTk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9tZW1iZXJzaGlwIjoiUHJlbWl1bSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbGFuZ3VhZ2UiOiJlbi1nYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvZXhwaXJhdGlvbiI6IjIwOTktMTItMzEiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL21lbWJlcnNoaXBzdGFydCI6IjIwMjMtMDItMDUiLCJpc3MiOiJodHRwczovL3NhbmRib3gtYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTY3NjMzMTI0MSwibmJmIjoxNjc2MzI0MDQxfQ.zPjD73MdUdeHGfMQcYgWKHdsD7p4pdSo19MvWP3IvIE';
+    String token = await freshData();
     String format = 'json';
     String language = 'en-gb';
 
@@ -145,8 +153,6 @@ class ApiServices {
           symptoms = '122';
         }
     }
-
-    //print(symptomsValue);
 
     String endpoint = '$baseURL${route}symptoms=${[
       symptoms

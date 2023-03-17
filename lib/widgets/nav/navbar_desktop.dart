@@ -14,7 +14,6 @@ class NavBarDesktop extends StatefulWidget {
   State<NavBarDesktop> createState() => _NavBarDesktopState();
 }
 
-
 class _NavBarDesktopState extends State<NavBarDesktop> {
   @override
   Widget build(BuildContext context) {
@@ -50,19 +49,34 @@ class _NavBarDesktopState extends State<NavBarDesktop> {
                     SizedBox(
                       width: 15,
                     ),
-                    
+                    NavBarItems(
+                        onPressed: () => Navigator.pushNamed(context, '/about'),
+                        title: 'About',
+                        initialColor: Colors.white,
+                        hoverColorIn: Color.fromARGB(255, 213, 252, 121),
+                        hoverColorOut: Colors.white),
+                        SizedBox(
+                      width: 15,
+                    ),
+                    NavBarItems(
+                        onPressed: () => Navigator.pushNamed(context, '/login'),
+                        title: 'Doctors',
+                        initialColor: Colors.white,
+                        hoverColorIn: Color.fromARGB(255, 213, 252, 121),
+                        hoverColorOut: Colors.white),
                     SizedBox(
                       width: 25,
                     ),
                     PrimaryButton(
-                      title: 'Run Diagnosis',
+                      title: 'Start Diagnosis',
                       initalTextColor: Color.fromARGB(255, 1, 12, 85),
                       initialBgColor: Colors.white,
                       hoverInColor: Color.fromARGB(255, 1, 12, 85),
                       hoverInBgColor: Color.fromARGB(255, 213, 252, 121),
                       hoverOutColor: Color.fromARGB(255, 1, 12, 85),
                       hoverOutBgColor: Colors.white,
-                    onPressed: () => Navigator.pushNamed(context, '/dashboard'),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/dashboard'),
                     ),
                   ],
                 )

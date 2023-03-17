@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tokenProvider = StateProvider<String>((ref) => '');
+final previousSymptomsProvider = StateProvider<String>((ref) => '');
 
-class TokenTextfield extends ConsumerWidget {
+class PreviousSymptomsTextField extends ConsumerWidget {
   final _labelFont = const TextStyle(
       fontSize: 12,
       color: Color.fromARGB(255, 145, 146, 150),
@@ -11,28 +11,22 @@ class TokenTextfield extends ConsumerWidget {
       letterSpacing: 0.6,
       fontWeight: FontWeight.w500);
 
-  const TokenTextfield({super.key});
+  const PreviousSymptomsTextField({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       width: 750,
       child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Empty';
-          } else {
-            return null;
-          }
-        },
-        onChanged: (String value) =>
-            ref.watch(tokenProvider.notifier).update((state) => value),
+        onChanged: (String value) => ref
+            .watch(previousSymptomsProvider.notifier)
+            .update((state) => value),
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           isDense: true,
           labelStyle: _labelFont,
-          hintText: 'Token',
+          hintText: 'Previous Symptoms (Optional)',
           hintStyle: _labelFont,
           alignLabelWithHint: true,
           fillColor: const Color.fromARGB(255, 237, 236, 236),
@@ -64,12 +58,5 @@ class TokenTextfield extends ConsumerWidget {
         ),
       ),
     );
-    /*return TextFormField(
-      
-      decoration: InputDecoration(
-        hintText: 'Full name',
-        border: const OutlineInputBorder(),
-      ),
-    );*/
   }
 }

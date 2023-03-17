@@ -11,6 +11,13 @@ class AgeTextField extends ConsumerWidget {
       letterSpacing: 0.6,
       fontWeight: FontWeight.w500);
 
+      final _errorText = const TextStyle(
+      fontSize: 12,
+      color: Color.fromARGB(255, 240, 93, 93),
+      height: 1.5,
+      letterSpacing: 0.6,
+      fontWeight: FontWeight.w500);
+
   const AgeTextField({super.key});
 
   @override
@@ -20,7 +27,7 @@ class AgeTextField extends ConsumerWidget {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Empty';
+            return 'Enter your age';
           } else {
             return null;
           }
@@ -34,6 +41,7 @@ class AgeTextField extends ConsumerWidget {
           labelStyle: _labelFont,
           hintText: 'Age',
           hintStyle: _labelFont,
+          errorStyle: _errorText,
           alignLabelWithHint: true,
           fillColor: const Color.fromARGB(255, 237, 236, 236),
           filled: true,
@@ -51,25 +59,19 @@ class AgeTextField extends ConsumerWidget {
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.red,
+              color: Color.fromARGB(255, 240, 93, 93),
             ),
             borderRadius: BorderRadius.circular(2.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color.fromARGB(255, 211, 47, 47),
+              color: Color.fromARGB(255, 240, 93, 93),
             ),
             borderRadius: BorderRadius.circular(2.0),
           ),
         ),
       ),
     );
-    /*return TextFormField(
-      
-      decoration: InputDecoration(
-        hintText: 'Full name',
-        border: const OutlineInputBorder(),
-      ),
-    );*/
+   
   }
 }

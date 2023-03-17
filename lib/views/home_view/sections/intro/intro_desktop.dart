@@ -71,7 +71,7 @@ class _IntroDesktopState extends State<IntroDesktop> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             PrimaryButton(
-                              title: 'Get Started',
+                              title: 'Start Diagnosis',
                               initalTextColor: Colors.black,
                               initialBgColor: Colors.white,
                               hoverInColor: Colors.black,

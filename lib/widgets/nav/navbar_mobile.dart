@@ -100,13 +100,43 @@ class _NavBarMobileState extends State<NavBarMobile> {
                           SizedBox(
                             height: 20.0,
                           ),
+                          NavBarItems(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = false;
+                                  myMenu = FontAwesomeIcons.bars;
+                                });
+                                Navigator.pushNamed(context, '/about');
+                              },
+                              title: 'About',
+                              initialColor: Colors.white,
+                              hoverColorIn: Color.fromARGB(255, 213, 252, 121),
+                              hoverColorOut: Colors.white),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          NavBarItems(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = false;
+                                  myMenu = FontAwesomeIcons.bars;
+                                });
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              title: 'Doctors',
+                              initialColor: Colors.white,
+                              hoverColorIn: Color.fromARGB(255, 213, 252, 121),
+                              hoverColorOut: Colors.white),
+                          SizedBox(
+                            height: 20.0,
+                          ),
                           SizedBox(
                               width: width <= 420 ? 200 : 300,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   PrimaryButton(
-                                    title: 'Run Diagnosis',
+                                    title: 'Start Diagnosis',
                                     initalTextColor:
                                         Color.fromARGB(255, 1, 12, 85),
                                     initialBgColor: Colors.white,
