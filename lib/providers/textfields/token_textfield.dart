@@ -28,7 +28,7 @@ class TokenTextfield extends ConsumerWidget {
         onChanged: (String value) =>
             ref.watch(tokenProvider.notifier).update((state) => value),
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           isDense: true,
           labelStyle: _labelFont,

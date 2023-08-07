@@ -13,8 +13,6 @@ class NameTextField extends ConsumerWidget {
 
   const NameTextField({super.key});
 
- 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
@@ -30,7 +28,7 @@ class NameTextField extends ConsumerWidget {
         onChanged: (String value) =>
             ref.watch(nameProvider.notifier).update((state) => value),
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           isDense: true,
           labelStyle: _labelFont,
