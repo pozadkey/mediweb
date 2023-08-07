@@ -29,4 +29,4 @@ flutter run -d chrome
 
 # Live Preview
 
-Click [Here](https://http://medi-web.netlify.app)
+Click [Here](https://medi-web.netlify.app)
