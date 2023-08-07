@@ -67,7 +67,7 @@ class _IntroMobileState extends State<IntroMobile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PrimaryButton(
-                  title: 'Get Started',
+                  title: 'Start Diagnosis',
                   initalTextColor: Colors.black,
                   initialBgColor: Colors.white,
                   hoverInColor: Colors.black,

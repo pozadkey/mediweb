@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 final genderProvider = StateProvider<String>((ref) => 'Select Gender');
 
 // Initial Selected Value
@@ -21,6 +20,13 @@ const _labelFont = TextStyle(
     letterSpacing: 0.6,
     fontWeight: FontWeight.w500);
 
+const _errorText = TextStyle(
+    fontSize: 12,
+    color: Color.fromARGB(255, 240, 93, 93),
+    height: 1.5,
+    letterSpacing: 0.6,
+    fontWeight: FontWeight.w500);
+
 class GenderMenu extends ConsumerWidget {
   const GenderMenu({super.key});
 
@@ -29,14 +35,17 @@ class GenderMenu extends ConsumerWidget {
     return DropdownButtonFormField(
       decoration: const InputDecoration(
         enabledBorder: OutlineInputBorder(
-          
+            borderSide: BorderSide(color: Colors.transparent, width: 2),
+            borderRadius: BorderRadius.zero),
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.transparent, width: 2),
         ),
-        focusedBorder: OutlineInputBorder(
-          
-          borderSide: BorderSide(color: Colors.transparent, width: 2),
+        errorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 240, 93, 93), width: 2),
         ),
         filled: true,
+        errorStyle: _errorText,
         fillColor: Color.fromARGB(255, 200, 200, 200),
       ),
       dropdownColor: const Color.fromARGB(255, 200, 200, 200),
@@ -59,8 +68,9 @@ class GenderMenu extends ConsumerWidget {
           ),
         );
       }).toList(),
-      // After selecting the desired option,it will
-      // change button value to selected value
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+          value == 'Select Gender' ? 'Please select  gender' : null,
       onChanged: (String? newValue) {
         ref
             .watch(genderProvider.notifier)

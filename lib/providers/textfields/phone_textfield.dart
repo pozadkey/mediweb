@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tokenProvider = StateProvider<String>((ref) => '');
+final phoneProvider = StateProvider<String>((ref) => '');
 
-class TokenTextfield extends ConsumerWidget {
+class PhoneTextField extends ConsumerWidget {
   final _labelFont = const TextStyle(
       fontSize: 12,
       color: Color.fromARGB(255, 145, 146, 150),
@@ -11,7 +11,14 @@ class TokenTextfield extends ConsumerWidget {
       letterSpacing: 0.6,
       fontWeight: FontWeight.w500);
 
-  const TokenTextfield({super.key});
+  final _errorText = const TextStyle(
+      fontSize: 12,
+      color: Color.fromARGB(255, 240, 93, 93),
+      height: 1.5,
+      letterSpacing: 0.6,
+      fontWeight: FontWeight.w500);
+
+  const PhoneTextField({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,21 +27,22 @@ class TokenTextfield extends ConsumerWidget {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Empty';
+            return 'Enter your phone number';
           } else {
             return null;
           }
         },
         onChanged: (String value) =>
-            ref.watch(tokenProvider.notifier).update((state) => value),
+            ref.watch(phoneProvider.notifier).update((state) => value),
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           isDense: true,
           labelStyle: _labelFont,
-          hintText: 'Token',
+          hintText: 'Phone number',
           hintStyle: _labelFont,
           alignLabelWithHint: true,
+          errorStyle: _errorText,
           fillColor: const Color.fromARGB(255, 237, 236, 236),
           filled: true,
           enabledBorder: OutlineInputBorder(
@@ -51,25 +59,18 @@ class TokenTextfield extends ConsumerWidget {
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.red,
+              color: Color.fromARGB(255, 240, 93, 93),
             ),
             borderRadius: BorderRadius.circular(2.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color.fromARGB(255, 211, 47, 47),
+              color: Color.fromARGB(255, 240, 93, 93),
             ),
             borderRadius: BorderRadius.circular(2.0),
           ),
         ),
       ),
     );
-    /*return TextFormField(
-      
-      decoration: InputDecoration(
-        hintText: 'Full name',
-        border: const OutlineInputBorder(),
-      ),
-    );*/
   }
 }

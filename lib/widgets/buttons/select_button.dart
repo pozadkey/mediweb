@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class SelectButton extends StatefulWidget {
-  IconData icon;
+  final String title;
   Color initalTextColor;
   Color initialBgColor;
   Color hoverInColor;
@@ -14,7 +14,7 @@ class SelectButton extends StatefulWidget {
 
   SelectButton(
       {Key? key,
-      required this.icon,
+      required this.title,
       required this.initalTextColor,
       required this.initialBgColor,
       required this.hoverInColor,
@@ -31,6 +31,12 @@ class SelectButton extends StatefulWidget {
 class _SelectButtonState extends State<SelectButton> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    final selectButtonFont = TextStyle(
+        fontStyle: FontStyle.normal,
+        fontSize: width >= 700 ? 16 : 14,
+        color: widget.initalTextColor,
+        fontWeight: FontWeight.w500);
 
     return MouseRegion(
       onEnter: (m) {
@@ -47,16 +53,25 @@ class _SelectButtonState extends State<SelectButton> {
       },
       child: TextButton(
         child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Icon(widget.icon, color: widget.initalTextColor, size: 20),
+          padding: width >= 800 ? EdgeInsets.all(8) : EdgeInsets.all(6),
+          child: Text(
+            widget.title,
+            style: selectButtonFont,
+          ),
         ),
         onPressed: () {
+          setState(() {
+            widget.initalTextColor = widget.hoverInColor;
+            widget.initialBgColor = widget.hoverInColor;
+          });
           widget.onPressed();
         },
         style: TextButton.styleFrom(
           backgroundColor: widget.initialBgColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(2.0),
+            borderRadius: BorderRadius.circular(
+              30.0,
+            ),
           ),
         ),
       ),

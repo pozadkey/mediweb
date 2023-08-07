@@ -54,15 +54,14 @@ class _AboutDesktopState extends State<AboutDesktop> {
               SizedBox(
                 width: 200,
                 child: PrimaryButton(
-                  title: 'Run Diagnosis',
+                  title: 'Read More...',
                   initalTextColor: Colors.black,
                   initialBgColor: Colors.white,
                   hoverInColor: Colors.black,
                   hoverInBgColor: const Color.fromARGB(255, 213, 252, 121),
                   hoverOutColor: Colors.black,
                   hoverOutBgColor: Colors.white,
-                   onPressed: () =>
-                                  Navigator.pushNamed(context, '/dashboard'),
+                  onPressed: () => Navigator.pushNamed(context, '/about'),
                 ),
               ),
             ],

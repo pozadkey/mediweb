@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final nameProvider = StateProvider<String>((ref) => '');
+final addressProvider = StateProvider<String>((ref) => '');
 
-class NameTextField extends ConsumerWidget {
+class AddressTextfield extends ConsumerWidget {
   final _labelFont = const TextStyle(
       fontSize: 12,
       color: Color.fromARGB(255, 145, 146, 150),
@@ -11,7 +11,14 @@ class NameTextField extends ConsumerWidget {
       letterSpacing: 0.6,
       fontWeight: FontWeight.w500);
 
-  const NameTextField({super.key});
+      final _errorText = const TextStyle(
+      fontSize: 12,
+      color: Color.fromARGB(255, 240, 93, 93),
+      height: 1.5,
+      letterSpacing: 0.6,
+      fontWeight: FontWeight.w500);
+
+  const AddressTextfield({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,20 +27,21 @@ class NameTextField extends ConsumerWidget {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Empty';
+            return 'Enter your address';
           } else {
             return null;
           }
         },
         onChanged: (String value) =>
-            ref.watch(nameProvider.notifier).update((state) => value),
+            ref.watch(addressProvider.notifier).update((state) => value),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           isDense: true,
           labelStyle: _labelFont,
-          hintText: 'Full Name',
+          hintText: 'Home Address',
           hintStyle: _labelFont,
+          errorStyle: _errorText,
           alignLabelWithHint: true,
           fillColor: const Color.fromARGB(255, 237, 236, 236),
           filled: true,
@@ -51,13 +59,13 @@ class NameTextField extends ConsumerWidget {
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.red,
+              color: Color.fromARGB(255, 240, 93, 93),
             ),
             borderRadius: BorderRadius.circular(2.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color.fromARGB(255, 211, 47, 47),
+              color: Color.fromARGB(255, 240, 93, 93),
             ),
             borderRadius: BorderRadius.circular(2.0),
           ),

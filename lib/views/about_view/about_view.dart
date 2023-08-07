@@ -1,27 +1,26 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:mediweb/views/home_view/sections/faq/faq.dart';
-
-import '../../widgets/footer/footer.dart';
+import 'package:mediweb/widgets/footer/footer.dart';
 import '../../widgets/nav/navbar.dart';
-import 'sections/about/about.dart';
-import 'sections/intro/intro.dart';
+import 'about_view_details.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class AboutView extends StatefulWidget {
+  const AboutView({Key? key}) : super(key: key);
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<AboutView> createState() => _AboutViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _AboutViewState extends State<AboutView> {
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
       if (orientation == Orientation.landscape) {
         return LayoutBuilder(
             builder: (context, constraints) => Scaffold(
-                  backgroundColor: Color.fromARGB(255, 1, 12, 85),
+                  backgroundColor: const Color.fromARGB(255, 1, 12, 85),
                   body: Column(
                     children: [
                       Expanded(
@@ -33,8 +32,7 @@ class _HomeViewState extends State<HomeView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 NavBar(),
-                                Intro(),
-                                About(),
+                                AboutViewDetails(),
                                 FaqViewDetails(),
                                 Footer()
                               ],
@@ -48,27 +46,23 @@ class _HomeViewState extends State<HomeView> {
       } else {
         return LayoutBuilder(
             builder: (context, constraints) => Scaffold(
-                  backgroundColor: Color.fromRGBO(1, 12, 85, 1),
+                  backgroundColor: const Color.fromARGB(255, 1, 12, 85),
                   body: Column(
                     children: [
                       NavBar(),
                       Expanded(
-                        child: Center(
-                          child: SingleChildScrollView(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                  minHeight: constraints.maxHeight),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(),
-                                  Intro(),
-                                  About(),
-                                  FaqViewDetails(),
-                                  Footer()
-                                ],
-                              ),
+                        child: SingleChildScrollView(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                                minHeight: constraints.maxHeight),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(),
+                                AboutViewDetails(),
+                                FaqViewDetails(),
+                                Footer()
+                              ],
                             ),
                           ),
                         ),
